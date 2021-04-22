@@ -29,8 +29,18 @@
     return newList;
   }
 
-  const over20Age = filter(users, (user) => { return user.age < 30 });
-  console.log(over20Age);
+  function map(list, mapper) {
+    let newList = [];
+    for (let i = 0; i < list.length; i ++) {
+      newList.push(mapper(list[i]));
+    }
+    return newList;
+  }
+
+  const userOver20Age = filter(users, (user) => { return user.age < 30 });
+  const namesOver20Age = map(userOver20Age, (user) => { return user.name });
+  console.log(userOver20Age);
+  console.log(namesOver20Age);
 
 </script>
 </body>
