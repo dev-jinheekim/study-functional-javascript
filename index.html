@@ -19,26 +19,32 @@
     { id: 8, name: 'MP', age: 23 }
   ];
 
-  function filter(list, predicate) {
-    let newList = [];
+  function _each(list, iter) {
     for (let i = 0; i < list.length; i ++) {
-      if (predicate(list[i])) {
-        newList.push(list[i]);
+      iter(list[i]);
+    }
+  }
+
+  function _filter(list, predicate) {
+    let newList = [];
+    _each(list, (value) => {
+      if (predicate(value)) {
+        newList.push(value);
       }
-    }
+    })
     return newList;
   }
 
-  function map(list, mapper) {
+  function _map(list, mapper) {
     let newList = [];
-    for (let i = 0; i < list.length; i ++) {
-      newList.push(mapper(list[i]));
-    }
+    _each(list, (value) => {
+      newList.push(mapper(value));
+    });
     return newList;
   }
 
-  const userOver20Age = filter(users, (user) => { return user.age < 30 });
-  const namesOver20Age = map(userOver20Age, (user) => { return user.name });
+  const userOver20Age = _filter(users, (user) => { return user.age < 30 });
+  const namesOver20Age = _map(userOver20Age, (user) => { return user.name });
   console.log(userOver20Age);
   console.log(namesOver20Age);
 
